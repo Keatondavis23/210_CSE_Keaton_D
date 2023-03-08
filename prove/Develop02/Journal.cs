@@ -1,31 +1,65 @@
-﻿using System.IO; 
+﻿using System.IO;
+using System.Runtime.InteropServices.JavaScript;
 using Develop02;
 
-public class Journal
+class Journal
 {
-    private string _filename = "";
+    List<Entry> entries;              //Created list for each entry and date for each
+
     public Journal()
     {
+        entries = new List<Entry>();
     }
-
-    public void FileCreate()                 //Writing and creating a file
+    public void DisplayEntries()
     {
-        Console.Write("What do you want to name the file?:\n");  //Stores name of new file
-        _filename = Console.ReadLine();
-        
-        using (StreamWriter outputFile = new StreamWriter(_filename)) //Creates new file with name given
+        foreach (Entry entry in entries)
         {
-            foreach (var _response in _entrylist)                     //Creates a loop to put every entry from our list
-            {                                                         //into the new file
-                outputFile.WriteLine(_response);
-            }
-        }
+            entry.DisplayEntry();
+        }//Loop to write all items in list
     }
     
-    public void FileRead()
+    public void CreateEntry()
     {
-        string[] lines = System.IO.File.ReadAllLines(_filename);
-        //??????????????????????????????????
+        PromptGenerator MyPrompt = new PromptGenerator();
+        string prompt = MyPrompt.Prompt_Maker();
+        Console.WriteLine(prompt);
+        string response = Console.ReadLine();
+        DateTime date1 = DateTime.Now;
+        string date = date1.ToShortDateString();
+        Entry entryx = new Entry(date, prompt, response);
+
+    }
+    
+    
+    
+    
+    public void FileCreate()                 //Writing and creating a file
+    {
+
+        List<string> records = new List<string>();
+        foreach (Entry entry in entries)
+        {
+            records.Add(entry.getEntryAsCSV());
+        }
+        Console.WriteLine("Name of the file to save?:");
+        string _fileName = Console.ReadLine();
+        
+        File.WriteAllLines(_fileName, records);
+    }
+        
+    public void FileRead() {
+        Console.WriteLine("Name of file to load?:");
+        string _fileName = Console.ReadLine();
+
+        List<string> records = System.IO.File.ReadAllLines(_fileName).ToList();
+        foreach (string record in records)
+        {
+            string[] splitString = record.Split("|");
+            Entry entry = new Entry(splitString[0], splitString[0], splitString[0]);
+            entries.Add(entry);
+        }
+
+        //Console.ReadKey();
     }
     
 }

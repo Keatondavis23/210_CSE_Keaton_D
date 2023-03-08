@@ -13,9 +13,7 @@ class Program
     
     static void Main(string[] args)
     {
-        
-        
-        
+        Journal journal = new Journal();
         int menuUserInput = 0;               //Variable storing the user's choice
 
         List<string> menu = new List<string> //This creates a list of options for the
@@ -42,26 +40,30 @@ class Program
             
             if (menuUserInput == 1)                          
             {                                                           //Provides the instance for the user
-                Entry entry = new Entry();                              //to input a journal entry
-                entry.InstanceEntry();
+                Journal create = new Journal();
+                create.CreateEntry();
             }
 
             else if (menuUserInput == 2)
             {
-                Entry display = new Entry();                            //Displays all journal entries
+                Journal display = new Journal();                            //Displays all journal entries
                 display.DisplayEntries();
             }
 
             else if (menuUserInput ==3)
             {
-                //here in this code you would load the entries 
-                //that were written to a file location
+                Journal create = new Journal();
+                create.FileCreate();
             }
 
             else if (menuUserInput ==4)
             {
-                //here in this code you would save the entries 
-                //that were written to a file location
+                Journal read = new Journal();
+                read.FileRead();
+            }
+            else if (menuUserInput == 5)
+            {
+                System.Environment.Exit(1);
             }
         }
     }
