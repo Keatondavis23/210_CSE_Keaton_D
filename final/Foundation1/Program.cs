@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Foundation1
 {
     class Program
