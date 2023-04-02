@@ -1,5 +1,5 @@
 ﻿namespace Foundation3;
-
+ 
 class Event {
     public string title;
     private string description;

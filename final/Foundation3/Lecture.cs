@@ -1,5 +1,5 @@
 ﻿namespace Foundation3;
-
+ 
 class Lecture : Event {
     private string speaker;
     private int capacity;

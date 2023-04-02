@@ -1,5 +1,5 @@
 ﻿namespace Foundation3;
-
+ 
 class Address{
     private string street;
     private string city;
